@@ -40,4 +40,7 @@ dependencies {
     //kotlin 에서는 kapt로 해야 에러가 안남 - developer 홈페이지 문서
     kapt 'androidx.room:room-compiler:2.2.5'
 
+    //for coroutine
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.2.0-alpha01'
+
 }
