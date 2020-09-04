@@ -42,5 +42,5 @@ dependencies {
 
     //for coroutine
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.2.0-alpha01'
-
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
 }
