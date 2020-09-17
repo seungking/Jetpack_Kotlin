@@ -3,10 +3,12 @@ package com.e.jetpack_kotlin
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory
 import androidx.lifecycle.lifecycleScope
+import com.e.jetpack_kotlin.databinding.ActivityMainBinding
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -15,26 +17,28 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+//        setContentView(R.layout.activity_main)
 
-        val viewModel =
-            ViewModelProvider(this, AndroidViewModelFactory(application)).get(
-                MainViewModel::class.java
-            )
+        val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
+        //livedata 활용하기 위해서
+        binding.lifecycleOwner = this
+
+        val viewModel = ViewModelProvider(this, AndroidViewModelFactory(application)).get(MainViewModel::class.java)
+        binding.viewModel = viewModel;
 
         //UI 갱신
         //livedata observe
-        viewModel.getAll()!!.observe(this, Observer {
-            result_text.text = it.toString();
-
-        })
+//        viewModel.getAll()!!.observe(this, Observer {
+//            result_text.text = it.toString();
+//
+//        })
 
         add_button.setOnClickListener {
             //비동기 작업
             //Dispathchers.IO -> 백그라운드에서 동작
-            lifecycleScope.launch(Dispatchers.IO) {
-                viewModel.insert(Todo(input_todo.text.toString()))
-            }
+//            lifecycleScope.launch(Dispatchers.IO) {
+//                viewModel.insert(Todo(input_todo.text.toString()))
+//            }
 //            result_text.setText(db.todoDao()!!.getAll().toString())
         }
 
