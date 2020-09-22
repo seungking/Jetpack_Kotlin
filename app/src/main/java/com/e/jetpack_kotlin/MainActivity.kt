@@ -1,5 +1,6 @@
 package com.e.jetpack_kotlin
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -25,6 +26,8 @@ class MainActivity : AppCompatActivity() {
 
         val viewModel = ViewModelProvider(this, AndroidViewModelFactory(application)).get(MainViewModel::class.java)
         binding.viewModel = viewModel;
+
+        tomain2.setOnClickListener { startActivity(Intent(this, MainActivity2::class.java)) }
 
         //UI 갱신
         //livedata observe
